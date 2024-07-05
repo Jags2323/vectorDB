@@ -1,0 +1,112 @@
+from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
+from sentence_transformers import SentenceTransformer
+from . import file_processing
+
+# Function to connect to Milvus
+def _connect_milvus(host="127.0.0.1", port="19530"):
+    connections.connect("default", host=host, port=port)
+
+# Function to create collection
+def _create_collection(collection_name, dim):
+    fields = [
+        FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
+        FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=dim),
+        FieldSchema(name="text", dtype=DataType.VARCHAR, max_length=10000)
+    ]
+    schema = CollectionSchema(fields)
+    collection = Collection(name=collection_name, schema=schema)
+    return collection
+
+# Function to drop existing collection
+def _drop_collection(collection_name):
+    if utility.has_collection(collection_name):
+        collection = Collection(collection_name)
+        collection.drop()
+
+# Function to insert data into Milvus
+def _insert_data(collection, embeddings, texts):
+    data = [
+        embeddings,
+        texts  # Insert plain strings
+    ]
+    collection.insert(data)
+
+# Function to create an index on the collection
+def _create_index(collection):
+    index_params = {
+        "index_type": "IVF_FLAT",
+        "params": {"nlist": 100},
+        "metric_type": "L2"
+    }
+    collection.create_index(field_name="embedding", index_params=index_params)
+
+# Function to query Milvus
+def _query_milvus(collection_name, model, question):
+    collection = Collection(collection_name)
+    question_embedding = model.encode([question])[0].tolist()
+    search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
+    results = collection.search(
+        data=[question_embedding], 
+        anns_field="embedding", 
+        param=search_params, 
+        limit=3, 
+        output_fields=["text"]
+    )
+    return results
+
+# Public function to generate and save data in Milvus
+def generate_and_save_data(file_path, collection_name, host="127.0.0.1", port="19530", dim=384):
+    _connect_milvus(host, port)
+    
+    # Check if collection exists
+    if not utility.has_collection(collection_name):
+        # Create a new collection if it doesn't exist
+        collection = _create_collection(collection_name, dim)
+    else:
+        # Use the existing collection
+        collection = Collection(collection_name)
+    
+    # Determine file type and process accordingly
+    if file_path.endswith('.pdf'):
+        paragraphs = file_processing.process_pdf_file(file_path)
+    else:
+        paragraphs = file_processing.process_text_file(file_path)
+
+    # Vectorize the paragraphs
+    model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+    embeddings = [model.encode([paragraph])[0].tolist() for paragraph in paragraphs]
+
+    # Insert data into Milvus
+    _insert_data(collection, embeddings, paragraphs)
+
+    # Create an index on the collection if it's a new collection
+    if not collection.has_index():
+        _create_index(collection)
+
+# Public function to query the Milvus collection and return results as JSON
+def query_collection(collection_name, prompt, host="127.0.0.1", port="19530"):
+    _connect_milvus(host, port)
+    model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+    
+    # Load the collection to make it searchable
+    collection = Collection(collection_name)
+    collection.load()
+
+    # Query the database
+    results = _query_milvus(collection_name, model, prompt)
+
+    # Extract and return the text and distance from the query results
+    result_list = []
+    if results:
+        for hit in results[0]:
+            result_text = hit.entity.get("text")  # Directly get the text
+            result_list.append({
+                "text": result_text,
+                "distance": hit.distance
+            })
+    return result_list
+
+# Public function to delete a collection
+def delete_collection(collection_name, host="127.0.0.1", port="19530"):
+    _connect_milvus(host, port)
+    _drop_collection(collection_name)
