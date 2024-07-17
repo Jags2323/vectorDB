@@ -1,7 +1,7 @@
 import requests
 
 def send_request(prompt):
-    url = 'http://localhost:5001/process_prompt'  # Update the endpoint to match your Flask route
+    url = 'http://localhost:5001/process_prompt' 
     data = {
         'prompt': prompt
     }
@@ -16,6 +16,5 @@ def send_request(prompt):
         print(f"Request error: {str(e)}")
 
 if __name__ == "__main__":
-    # Replace this with your actual prompt
     prompt = 'Info Related AI as list of points'
     send_request(prompt)
