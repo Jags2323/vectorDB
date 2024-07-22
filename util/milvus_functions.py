@@ -34,9 +34,9 @@ def _insert_data(collection, embeddings, texts):
 # Function to create an index on the collection
 def _create_index(collection):
     index_params = {
-        "index_type": "IVF_FLAT",
+        "index_type": "IVF_FLAT",  # Change to FAISS index type
         "params": {"nlist": 100},
-        "metric_type": "L2"
+        "metric_type": "L2"  # L2 can still be used as metric_type in FAISS
     }
     collection.create_index(field_name="embedding", index_params=index_params)
 
@@ -44,12 +44,12 @@ def _create_index(collection):
 def _query_milvus(collection_name, model, question):
     collection = Collection(collection_name)
     question_embedding = model.encode([question])[0].tolist()
-    search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
+    search_params = {"metric_type": "L2", "params": {"nprobe": 10}}  # Adjust as necessary for FAISS
     results = collection.search(
         data=[question_embedding], 
         anns_field="embedding", 
         param=search_params, 
-        limit=3, 
+        limit=15, 
         output_fields=["text"]
     )
     return results
@@ -67,17 +67,17 @@ def generate_and_save_data(file_path, collection_name, host="127.0.0.1", port="1
         collection = Collection(collection_name)
     
     # Determine file type and process accordingly
-    if file_path.endswith('.pdf'):
-        paragraphs = file_processing.process_pdf_file(file_path)
+    if file_path.endswith('.xml'):
+        text_segments = file_processing.process_xml_file_by_tag(file_path)
     else:
-        paragraphs = file_processing.process_text_file(file_path)
-
-    # Vectorize the paragraphs
+        text_segments = file_processing.process_text_file(file_path)
+    
+    # Vectorize the text_segments
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
-    embeddings = [model.encode([paragraph])[0].tolist() for paragraph in paragraphs]
+    embeddings = [model.encode([text_segment])[0].tolist() for text_segment in text_segments]
 
     # Insert data into Milvus
-    _insert_data(collection, embeddings, paragraphs)
+    _insert_data(collection, embeddings, text_segments)
 
     # Create an index on the collection if it's a new collection
     if not collection.has_index():

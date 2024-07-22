@@ -1,4 +1,6 @@
 import fitz
+import xml.etree.ElementTree as ET
+import re
 
 # Function to process text file
 def process_text_file(file_path):
@@ -40,3 +42,21 @@ def process_pdf_file(file_path):
         paragraphs.append(paragraph.strip())
     
     return paragraphs
+
+def process_xml_file_by_tag(file_path, tag="Device"):
+    text_segments = []
+    try:
+        tree = ET.parse(file_path)
+        root = tree.getroot()
+        
+        for element in root.findall(f'.//{tag}'):
+            # Convert the element to a string
+            element_string = ET.tostring(element, encoding='unicode', method='xml')
+            # Remove new lines and excessive spaces
+            clean_string = re.sub(r'\s+', ' ', element_string).strip()
+            text_segments.append(clean_string)
+                
+    except ET.ParseError as e:
+        print(f"Error parsing XML file: {e}")
+    
+    return text_segments
