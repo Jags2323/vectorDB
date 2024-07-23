@@ -1,6 +1,6 @@
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 from sentence_transformers import SentenceTransformer
-import file_processing
+from . import file_processing
 
 # Function to connect to Milvus
 def _connect_milvus(host="127.0.0.1", port="19530"):

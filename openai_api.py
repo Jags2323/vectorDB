@@ -5,7 +5,7 @@ from util import milvus_functions
 
 # Function to handle file processing and AI response
 def process_file(prompt):
-    file_path = '../data/paragraphs.txt'
+    file_path = 'mock/paragraphs.txt'
     collection_name = "paragraph_collection"
 
     milvus_functions.delete_collection(collection_name)
@@ -18,7 +18,7 @@ def process_file(prompt):
     client = OpenAI(api_key=api_key)
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": f"Answer the following question based on the provided context:{context_json}\n\nQuestion: {prompt}"}
