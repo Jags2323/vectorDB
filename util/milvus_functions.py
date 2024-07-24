@@ -69,6 +69,8 @@ def generate_and_save_data(file_path, collection_name, host="127.0.0.1", port="1
     # Determine file type and process accordingly
     if file_path.endswith('.xml'):
         text_segments = file_processing.process_xml_file_by_tag(file_path)
+    elif file_path.endswith('.pdf'):
+        text_segments = file_processing.process_pdf_file(file_path)
     else:
         text_segments = file_processing.process_text_file(file_path)
     
