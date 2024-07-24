@@ -4,12 +4,13 @@ from openai import OpenAI
 from util import milvus_functions
 
 # Function to handle file processing and AI response
-def process_file(prompt):
-    file_path = 'mock/paragraphs.txt'
+def process_file(prompt, conversation_history):
+    
     collection_name = "paragraph_collection"
 
-    milvus_functions.delete_collection(collection_name)
-    milvus_functions.generate_and_save_data(file_path, collection_name)
+    # file_path = 'mock/paragraphs.txt'
+    # milvus_functions.delete_collection(collection_name)
+    # milvus_functions.generate_and_save_data(file_path, collection_name)
 
     results = milvus_functions.query_collection(collection_name, prompt)
     context_json = json.dumps(results)
@@ -17,12 +18,13 @@ def process_file(prompt):
     api_key = os.environ.get("OPENAI_API_KEY")
     client = OpenAI(api_key=api_key)
 
+    # Prepare messages for the conversation history
+    conversation_history.append({"role": "user", "content": f"{prompt}"})
+    conversation_history.append({"role": "system", "content": f"Context:{context_json}"})
+
     response = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": f"Answer the following question based on the provided context:{context_json}\n\nQuestion: {prompt}"}
-        ],
+        messages=conversation_history,
         max_tokens=200
     )
 
@@ -31,4 +33,7 @@ def process_file(prompt):
     else:
         generated_answer = "No response generated"
 
-    return generated_answer
+    # Update the conversation history with the new messages
+    conversation_history.append({"role": "assistant", "content": f"{generated_answer}"})
+
+    return generated_answer, conversation_history

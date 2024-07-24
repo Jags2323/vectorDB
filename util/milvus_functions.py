@@ -49,7 +49,7 @@ def _query_milvus(collection_name, model, question):
         data=[question_embedding], 
         anns_field="embedding", 
         param=search_params, 
-        limit=15, 
+        limit=3, 
         output_fields=["text"]
     )
     return results

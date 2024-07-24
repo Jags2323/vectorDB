@@ -5,9 +5,13 @@ import openai_api
 app = Flask(__name__)
 CORS(app)
 
-# Flask endpoint to process files
+# In-memory store for conversation history
+conversation_history = [{"role": "system", "content": "You are a helpful assistant. Answer questions of the user based on context provided."}]
+
+# Flask endpoint to process prompts
 @app.route('/process_prompt', methods=['POST'])
 def process_prompt_endpoint():
+    global conversation_history  # Use global to ensure we modify the original list
     data = request.json
     prompt = data.get('prompt')
 
@@ -15,8 +19,8 @@ def process_prompt_endpoint():
         return jsonify({"error": "Prompt is required."}), 400
 
     try:
-        result = openai_api.process_file(prompt)
-        return jsonify({"response": result}), 200
+        result, conversation_history = openai_api.process_file(prompt, conversation_history)
+        return jsonify({"response": result, "context": f"{conversation_history}"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
