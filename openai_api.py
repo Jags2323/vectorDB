@@ -5,10 +5,9 @@ from util import milvus_functions
     
 #/Users/jags/Desktop/Mints_Data/mints-main
 def process_file(prompt, conversation_history):
-    file_path = '/Users/jags/Desktop/Mints_Data/mints-main/MINTS' 
-    collection_name = "paragraph_collection"
+    collection_name = "mint_collection"
 
-    # file_path = 'mock/paragraphs.txt'
+    # file_path = 'MINTS/'
     # milvus_functions.delete_collection(collection_name)
     # milvus_functions.generate_and_save_data(file_path, collection_name)
 
@@ -23,9 +22,9 @@ def process_file(prompt, conversation_history):
     conversation_history.append({"role": "system", "content": f"Context:{context_json}"})
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=conversation_history,
-        max_tokens=200
+        max_tokens=2000
     )
 
     if response.choices:

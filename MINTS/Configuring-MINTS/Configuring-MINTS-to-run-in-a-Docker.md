@@ -1,0 +1,1 @@
+Configuring MINTS to run in a Docker
