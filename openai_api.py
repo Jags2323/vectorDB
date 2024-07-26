@@ -6,7 +6,7 @@ from util import milvus_functions
 # Function to handle file processing and AI response
 #/Users/jags/Desktop/Mints_Data/mints-main
 def process_file(prompt):
-    file_path = '/Users/jags/Desktop/Mints_Data/mints-main' 
+    file_path = '/Users/jags/Desktop/Mints_Data/mints-main/MINTS' 
     collection_name = "paragraph_collection"
 
     milvus_functions.delete_collection(collection_name)
@@ -24,7 +24,7 @@ def process_file(prompt):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": f"Answer the following question based on the provided context:{context_json}\n\nQuestion: {prompt}"}
         ],
-        max_tokens=200
+        max_tokens=1000
     )
 
     if response.choices:
