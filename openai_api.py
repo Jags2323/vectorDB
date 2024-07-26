@@ -22,7 +22,7 @@ def process_file(prompt, conversation_history):
     conversation_history.append({"role": "system", "content": f"Context:{context_json}"})
 
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=conversation_history,
         max_tokens=2000
     )
