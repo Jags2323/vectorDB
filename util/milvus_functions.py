@@ -1,6 +1,7 @@
+import os
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 from sentence_transformers import SentenceTransformer
-from . import file_processing
+from util import file_processing
 
 # Function to connect to Milvus
 def _connect_milvus(host="127.0.0.1", port="19530"):
@@ -54,8 +55,19 @@ def _query_milvus(collection_name, model, question):
     )
     return results
 
+# Function to process different file types
+def _process_file(file_path):
+    if file_path.endswith('.xml'):
+        return file_processing.process_xml_file_by_tag(file_path)
+    elif file_path.endswith('.pdf'):
+        return file_processing.process_pdf_file(file_path)
+    elif file_path.endswith('.txt') or file_path.endswith('.md'):
+        return file_processing.process_text_file(file_path)
+    else:
+        return []
+
 # Public function to generate and save data in Milvus
-def generate_and_save_data(file_path, collection_name, host="127.0.0.1", port="19530", dim=384):
+def generate_and_save_data(folder_path, collection_name, host="127.0.0.1", port="19530", dim=384):
     _connect_milvus(host, port)
     
     # Check if collection exists
@@ -66,13 +78,13 @@ def generate_and_save_data(file_path, collection_name, host="127.0.0.1", port="1
         # Use the existing collection
         collection = Collection(collection_name)
     
-    # Determine file type and process accordingly
-    if file_path.endswith('.xml'):
-        text_segments = file_processing.process_xml_file_by_tag(file_path)
-    elif file_path.endswith('.pdf'):
-        text_segments = file_processing.process_pdf_file(file_path)
-    else:
-        text_segments = file_processing.process_text_file(file_path)
+    text_segments = []
+
+    # Iterate through each file in the folder
+    for root, _, files in os.walk(folder_path):
+        for file in files:
+            file_path = os.path.join(root, file)
+            text_segments.extend(_process_file(file_path))
     
     # Vectorize the text_segments
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')

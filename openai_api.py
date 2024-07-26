@@ -2,10 +2,10 @@ import os
 import json
 from openai import OpenAI
 from util import milvus_functions
-
-# Function to handle file processing and AI response
-def process_file(prompt, conversation_history):
     
+#/Users/jags/Desktop/Mints_Data/mints-main
+def process_file(prompt, conversation_history):
+    file_path = '/Users/jags/Desktop/Mints_Data/mints-main/MINTS' 
     collection_name = "paragraph_collection"
 
     # file_path = 'mock/paragraphs.txt'
