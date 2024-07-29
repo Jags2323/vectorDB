@@ -5,18 +5,24 @@ from util import file_processing
 
 # Function to connect to Milvus
 def _connect_milvus(host="127.0.0.1", port="19530"):
-    connections.connect("default", host=host, port=port)
+    try:
+        connections.connect("default", host=host, port=port)
+    except Exception as e:
+        print(f"Failed to connect to Milvus: {e}")
 
 # Function to create collection
 def _create_collection(collection_name, dim):
-    fields = [
-        FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
-        FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=dim),
-        FieldSchema(name="text", dtype=DataType.VARCHAR, max_length=10000)
-    ]
-    schema = CollectionSchema(fields)
-    collection = Collection(name=collection_name, schema=schema)
-    return collection
+    try:
+        fields = [
+            FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
+            FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=dim),
+            FieldSchema(name="text", dtype=DataType.VARCHAR, max_length=10000)
+        ]
+        schema = CollectionSchema(fields)
+        collection = Collection(name=collection_name, schema=schema)
+        return collection
+    except Exception as e:
+        print(f"Failed to create collection: {e}")
 
 # Function to drop existing collection
 def _drop_collection(collection_name):
@@ -24,13 +30,16 @@ def _drop_collection(collection_name):
         collection = Collection(collection_name)
         collection.drop()
 
-# Function to insert data into Milvus
-def _insert_data(collection, embeddings, texts):
-    data = [
-        embeddings,
-        texts  # Insert plain strings
-    ]
-    collection.insert(data)
+# Function to insert data into Milvus in batches
+def _insert_data(collection, embeddings, texts, batch_size=100):
+    for i in range(0, len(embeddings), batch_size):
+        batch_embeddings = embeddings[i:i + batch_size]
+        batch_texts = texts[i:i + batch_size]
+        data = [
+            batch_embeddings,
+            batch_texts  # Insert plain strings
+        ]
+        collection.insert(data)
 
 # Function to create an index on the collection
 def _create_index(collection):
@@ -42,18 +51,22 @@ def _create_index(collection):
     collection.create_index(field_name="embedding", index_params=index_params)
 
 # Function to query Milvus
-def _query_milvus(collection_name, model, question):
-    collection = Collection(collection_name)
-    question_embedding = model.encode([question])[0].tolist()
-    search_params = {"metric_type": "L2", "params": {"nprobe": 10}}  # Adjust as necessary for FAISS
-    results = collection.search(
-        data=[question_embedding], 
-        anns_field="embedding", 
-        param=search_params, 
-        limit=10, 
-        output_fields=["text"]
-    )
-    return results
+def _query_milvus(collection_name, model, question, top_n=10):
+    try:
+        collection = Collection(collection_name)
+        question_embedding = model.encode([question])[0].tolist()
+        search_params = {"metric_type": "L2", "params": {"nprobe": 10}}  # Adjust as necessary for FAISS
+        results = collection.search(
+            data=[question_embedding], 
+            anns_field="embedding", 
+            param=search_params, 
+            limit=top_n, 
+            output_fields=["text"]
+        )
+        return results
+    except Exception as e:
+        print(f"Failed to query Milvus: {e}")
+        return []
 
 # Function to process different file types
 def _process_file(file_path):
@@ -67,7 +80,7 @@ def _process_file(file_path):
         return []
 
 # Public function to generate and save data in Milvus
-def generate_and_save_data(folder_path, collection_name, host="127.0.0.1", port="19530", dim=384):
+def generate_and_save_data(folder_path, collection_name, host="127.0.0.1", port="19530", dim=384, batch_size=100):
     _connect_milvus(host, port)
     
     # Check if collection exists
@@ -90,15 +103,15 @@ def generate_and_save_data(folder_path, collection_name, host="127.0.0.1", port=
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
     embeddings = [model.encode([text_segment])[0].tolist() for text_segment in text_segments]
 
-    # Insert data into Milvus
-    _insert_data(collection, embeddings, text_segments)
+    # Insert data into Milvus in batches
+    _insert_data(collection, embeddings, text_segments, batch_size)
 
     # Create an index on the collection if it's a new collection
     if not collection.has_index():
         _create_index(collection)
 
 # Public function to query the Milvus collection and return results as JSON
-def query_collection(collection_name, prompt, host="127.0.0.1", port="19530"):
+def query_collection(collection_name, prompt, host="127.0.0.1", port="19530", top_n=100):
     _connect_milvus(host, port)
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
     
@@ -107,7 +120,7 @@ def query_collection(collection_name, prompt, host="127.0.0.1", port="19530"):
     collection.load()
 
     # Query the database
-    results = _query_milvus(collection_name, model, prompt)
+    results = _query_milvus(collection_name, model, prompt, top_n)
 
     # Extract and return the text and distance from the query results
     result_list = []

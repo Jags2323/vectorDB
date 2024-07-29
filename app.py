@@ -11,7 +11,7 @@ conversation_history = [{"role": "system", "content": "You are a helpful assista
 # Flask endpoint to process prompts
 @app.route('/process_prompt', methods=['POST'])
 def process_prompt_endpoint():
-    global conversation_history  # Use global to ensure we modify the original list
+    global conversation_history  
     data = request.json
     prompt = data.get('prompt')
 
@@ -20,7 +20,7 @@ def process_prompt_endpoint():
 
     try:
         result, conversation_history = openai_api.process_file(prompt, conversation_history)
-        return jsonify({"response": result, "context": f"{conversation_history}"}), 200
+        return jsonify({"response": result["answer"], "context": f"{conversation_history}", "graph": result["graph"]}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
