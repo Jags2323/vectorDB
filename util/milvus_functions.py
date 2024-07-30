@@ -66,8 +66,7 @@ def _process_file(file_path):
     else:
         return []
 
-# Public function to generate and save data in Milvus
-def generate_and_save_data(folder_path, collection_name, host="127.0.0.1", port="19530", dim=384):
+def generate_and_save_data(path, collection_name, host="127.0.0.1", port="19530", dim=384):
     _connect_milvus(host, port)
     
     # Check if collection exists
@@ -80,12 +79,19 @@ def generate_and_save_data(folder_path, collection_name, host="127.0.0.1", port=
     
     text_segments = []
 
-    # Iterate through each file in the folder
-    for root, _, files in os.walk(folder_path):
-        for file in files:
-            file_path = os.path.join(root, file)
-            text_segments.extend(_process_file(file_path))
-    
+    # Check if the provided path is a directory or a single file
+    if os.path.isdir(path):
+        # Iterate through each file in the folder
+        for root, _, files in os.walk(path):
+            for file in files:
+                file_path = os.path.join(root, file)
+                text_segments.extend(_process_file(file_path))
+    elif os.path.isfile(path):
+        # Process the single file
+        text_segments.extend(_process_file(path))
+    else:
+        raise ValueError("The provided path is neither a directory nor a file")
+
     # Vectorize the text_segments
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
     embeddings = [model.encode([text_segment])[0].tolist() for text_segment in text_segments]
