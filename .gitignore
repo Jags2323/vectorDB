@@ -1,1 +1,12 @@
 *pycache*
+sample/appConfig.json
+sample/defaults.json
+sample/formatConfig.json
+sample/ibmMqConfig.json
+sample/integrations.json
+sample/mapsPropsConfig.json
+sample/masters.json
+sample/palettes.json
+sample/publishConfig.json
+sample/services.json
+sample/templates.json
