@@ -1,0 +1,142 @@
+[
+  {
+    "_id": "5e05e3b52e6e0b34840acd53",
+    "type": "format",
+    "name": "Integration Framework V0",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "",
+    "__v": 0
+  },
+  {
+    "_id": "5e05e4db2e6e0b34840acd54",
+    "type": "publish",
+    "name": "Publish to Git",
+    "version": "v0",
+    "active": false,
+    "default": false,
+    "url": "",
+    "__v": 0
+  },
+  {
+    "_id": "5e3998771c9d440000f8cb00",
+    "type": "publish",
+    "name": "Publish to Bitbucket",
+    "version": "v1",
+    "active": true,
+    "default": true,
+    "url": "",
+    "__v": 0
+  },
+  {
+    "_id": "5ea191daf8fa87442051a85c",
+    "type": "ibmMq",
+    "name": "IBM MQ REST API",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "",
+    "__v": 0
+  },
+  {
+    "_id": "5eb427640dd9de4178aa2674",
+    "type": "designer",
+    "name": "MTX",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "http://52.116.24.214:4000/",
+    "__v": 0
+  },
+  {
+    "_id": "5eb4272b0dd9de4178aa2673",
+    "type": "designer",
+    "name": "ITX",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "https://40.114.79.17/server",
+    "__v": 0
+  },
+  {
+    "_id": "5eb427720dd9de4178aa2675",
+    "type": "designer",
+    "name": "XSLT",
+    "version": "v0",
+    "active": false,
+    "default": true,
+    "url": "http://google.com",
+    "__v": 0
+  },
+  {
+    "_id": "5ee8cd02230c226b60dda486",
+    "type": "testing",
+    "name": "Integration Testing Framework V0",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "http://52.116.24.212:5000/projects/MINTS/integration/",
+    "__v": 0
+  },
+  {
+    "_id": "622c8e99b0ce4b410048059d",
+    "type": "documentation",
+    "name": "MINTS Documentation",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "http://52.116.24.210:3000",
+    "__v": 0
+  },
+  {
+    "_id": "622c9518b0ce4b410048059e",
+    "type": "references",
+    "name": "Infra Estimate",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "http://169.60.46.61:7000/",
+    "__v": 0
+  },
+  {
+    "_id": "622db99e1328ef6e4322d218",
+    "type": "references",
+    "name": "Integration Manager",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "http://169.60.46.59:8080/actuator/hawtio/jvm/connect",
+    "__v": 0
+  },
+  {
+    "_id": "623071abbb5447c487c00e54",
+    "type": "references",
+    "name": "Cluster Metrics",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "http://52.116.224.101:3000/d/1277/mints-metric-dashboard?orgId=1&var-datasource=prometheus&var-cluster=&var-namespace=default&var-pod=activemq-artemis-586c66f65b-j4qlz&var-pod=auth-service-b64c47b87-hw45h&var-pod=camelapp-6b5fbf5669-fjmd9&var-pod=data-mapper-api-service-66867d44f7-hxxsg&var-pod=data-mapper-db-service-66644f86d-rkwlk&var-pod=details-v1-79f774bdb9-8w5pq&var-pod=kubectl-8699dbfcc5-wcsz6&var-pod=mints-doc-service-55975cd7cf-kdg6c&var-pod=mints-format-api-service-7d76f8cbf-6qbkh&var-pod=mints-gateway-api-service-7bf574d587-9mvkk&var-pod=mints-integrations-api-service-7c7475b8dd-9ppgl&var-pod=mints-publish-api-service-7bd56886b9-j7x98&var-pod=mints-templates-api-service-f87c85b66-z6gf7&var-pod=mints-ui-service-6df867c8-n4gx8&var-pod=mintstestapi-5d54cdfc85-d4r2x&var-pod=mongo-56bd8dfd7f-zwz9t&var-pod=mongo-client-6f6b5c779b-88db4&var-pod=mq-ibm-mq-0&var-pod=mtx-api-service-5b94455556-zdb28&var-pod=mtx-ui-service-659b56d4f6-vpmb5&var-pod=mtxframework-667996cd7d-h5qsd&var-pod=nginx-ingress-controllerr-9a6a1083-86d5f94947-hjnqh&var-pod=nginx-ingress-controllerr-9a6a1083-default-backend-95755d68f5f6&var-pod=productpage-v1-6b746f74dc-79vff&var-pod=redis-deployment-8f6dfcd6b-2ptbv&var-pod=test-env-api-service-8876b9c45-tdjmt&var-pod=test-env-ui-service-d77d79b9d-pwggw&var-pod=txrest-deployment2-6bf5cb6c96-n6jlb",
+    "__v": 0
+  },
+  {
+    "_id": "62307288bb5447c487c00e56",
+    "type": "references",
+    "name": "Cluster Monitoring",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "http://52.116.24.211:80",
+    "__v": 0
+  },
+  {
+    "_id": "6230755fbb5447c487c00e57",
+    "type": "references",
+    "name": "Application Logs",
+    "version": "v0",
+    "active": true,
+    "default": true,
+    "url": "http://52.116.224.101:3000",
+    "__v": 0
+  }
+]

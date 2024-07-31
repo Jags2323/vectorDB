@@ -7,9 +7,9 @@ from util import milvus_functions
 def process_file(prompt, conversation_history):
     collection_name = "mints"
 
-    file_path = 'MINTS/'
-    milvus_functions.delete_collection(collection_name)
-    milvus_functions.generate_and_save_data(file_path, collection_name)
+    # file_path = 'MINTS/'
+    # milvus_functions.delete_collection(collection_name)
+    # milvus_functions.generate_and_save_data(file_path, collection_name)
 
     results = milvus_functions.query_collection(collection_name, prompt)
     context_json = json.dumps(results)

@@ -1,0 +1,352 @@
+[
+  {
+    "palettes": ["5dfdf48e1354e409841d7be3", "5dfdf67aeeaa430984fe9031"],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 }
+    ],
+    "_id": "611d19351a03770029d72e72",
+    "id": "T0001",
+    "name": "Pass through",
+    "description": "Pass through",
+    "category": "Basic",
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "5dfdf48e1354e409841d7be3",
+      "5e29d2d49b1e883db8e5e8a4",
+      "5dfdf67aeeaa430984fe9031"
+    ],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 }
+    ],
+    "_id": "611d197f1a03770029d72e73",
+    "id": "T0002",
+    "name": "Rest call",
+    "description": "Rest call",
+    "category": "Basic",
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "5dfdf48e1354e409841d7be3",
+      "5e29d15a9b1e883db8e5e8a3",
+      "5dfdf67aeeaa430984fe9031"
+    ],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 }
+    ],
+    "_id": "611d19c51a03770029d72e74",
+    "id": "T0003",
+    "name": "MTX Basic",
+    "description": "MTX Basic",
+    "category": "Transformations",
+    "__v": 0,
+    "hideProps": { "OutletEncoding": true }
+  },
+  {
+    "palettes": [
+      "5dfdf48e1354e409841d7be3",
+      "5e29d0359b1e883db8e5e8a2",
+      "5dfdf67aeeaa430984fe9031"
+    ],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 }
+    ],
+    "_id": "611d19ef1a03770029d72e75",
+    "id": "T0004",
+    "name": "XSLT",
+    "description": "XSLT",
+    "category": "Transformations",
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "5dfdf48e1354e409841d7be3",
+      "5e0c8743e1ac404290868787",
+      "5dfdf67aeeaa430984fe9031"
+    ],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 }
+    ],
+    "_id": "611d1a091a03770029d72e76",
+    "id": "T0005",
+    "name": "ITX",
+    "description": "ITX",
+    "category": "Transformations",
+    "__v": 0,
+    "hideProps": { "OutletEncoding": true }
+  },
+  {
+    "palettes": ["5dfdf48e1354e409841d7be3", "5e762cd717f68b5028216377"],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 }
+    ],
+    "_id": "611d2a1e1a03770029d72e77",
+    "id": "T0006",
+    "name": "QueToFile",
+    "description": "QueToFile",
+    "category": "File I/O",
+    "__v": 0
+  },
+  {
+    "palettes": ["5e75e0e317f68b5028216375", "5dfdf67aeeaa430984fe9031"],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 }
+    ],
+    "_id": "611d2a771a03770029d72e79",
+    "id": "T0007",
+    "name": "FileToQue",
+    "description": "FileToQue",
+    "category": "File I/O",
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "5dfdf48e1354e409841d7be3",
+      "611bb621362a29445ca5a8a6",
+      "5dfdf67aeeaa430984fe9031"
+    ],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 }
+    ],
+    "_id": "611e4d289e3940002a15c442",
+    "id": "T0008",
+    "name": "PGP Security",
+    "description": "Implement PGP Security encrypt & decrypt",
+    "category": "Basic",
+    "hideProps": { "OutletEncoding": true, "InletEncoding": true },
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "5e75e0e317f68b5028216375",
+      "611bb621362a29445ca5a8a6",
+      "5e762cd717f68b5028216377"
+    ],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 }
+    ],
+    "_id": "611e50749e3940002a15c443",
+    "id": "T0009",
+    "name": "File based encrypt & decrypt",
+    "description": "File based encrypt & decrypt",
+    "category": "File I/O",
+    "hideProps": { "OutletEncoding": true },
+    "__v": 0
+  },
+  {
+    "palettes": ["5e75e0e317f68b5028216375", "5e762cd717f68b5028216377"],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 }
+    ],
+    "_id": "611fa2cc87f6300029b0fa91",
+    "id": "T0010",
+    "name": "File to File Template",
+    "description": "File to File Template",
+    "category": "File I/O",
+    "hideProps": { "OutletEncoding": true },
+    "__v": 0
+  },
+  {
+    "palettes": ["6051e4bb7dea46002961f174", "6051e5987dea46002961f175"],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 }
+    ],
+    "_id": "611fd3b287f6300029b0fa92",
+    "id": "T0011",
+    "name": "SFTP Configuration",
+    "description": "SFTP Configuration",
+    "category": "FTP",
+    "__v": 0
+  },
+  {
+    "palettes": ["5e75e0e317f68b5028216375", "6051e5987dea46002961f175"],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 }
+    ],
+    "_id": "611fe38e87f6300029b0fa93",
+    "id": "T0012",
+    "name": "File to SFTP",
+    "description": "File to SFTP",
+    "category": "FTP",
+    "__v": 0
+  },
+  {
+    "palettes": ["6051e4bb7dea46002961f174", "5e762cd717f68b5028216377"],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 }
+    ],
+    "_id": "611fe5cd87f6300029b0fa94",
+    "id": "T0013",
+    "name": "SFTP To File",
+    "description": "SFTP To File",
+    "category": "FTP",
+    "hideProps": { "OutletEncoding": true },
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "5dfdf48e1354e409841d7be3",
+      "6197c3afa772fe0029e917ef",
+      "5dfdf67aeeaa430984fe9031"
+    ],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 }
+    ],
+    "_id": "6197c442a772fe0029e917f0",
+    "id": "T0014",
+    "name": "Data Mapper",
+    "description": "Data Mapper",
+    "category": "Transformations",
+    "hideProps": { "InletEncoding": true, "OutletEncoding": true },
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "5dfdf48e1354e409841d7be3",
+      "6213d4a43de4a6002a3400d6",
+      "5e29d0359b1e883db8e5e8a2",
+      "5dfdf67aeeaa430984fe9031"
+    ],
+    "relations": [
+      { "index": 0, "level": 0, "parent": null },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 },
+      { "index": 3, "level": 3, "parent": 2 }
+    ],
+    "_id": "6213d6b93de4a6002a3400d7",
+    "id": "T0015",
+    "name": "REST Inlet",
+    "description": "REST Inlet",
+    "category": "Basic",
+    "hideProps": { "OutletEncoding": true, "InletEncoding": true },
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "6213d4a43de4a6002a3400d6",
+      "5e29d0359b1e883db8e5e8a2",
+      "6197c3afa772fe0029e917ef",
+      "5e762cd717f68b5028216377",
+      "6230bc36a9e1194d0cc19ae4",
+      "5e29d15a9b1e883db8e5e8a3",
+      "5e29d2d49b1e883db8e5e8a4",
+      "5e762cd717f68b5028216377"
+    ],
+    "relations": [
+      { "index": 0, "level": 0 },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 },
+      { "index": 3, "level": 3, "parent": 2 },
+      { "index": 4, "level": 3, "parent": 2 },
+      { "index": 5, "level": 1, "parent": 0 },
+      { "index": 6, "level": 2, "parent": 5 },
+      { "index": 7, "level": 2, "parent": 5 }
+    ],
+    "_id": "622f262dfd34c0002af376b7",
+    "id": "T0016",
+    "name": "Multicast",
+    "description": "Multicast",
+    "category": "Basic",
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "6213d4a43de4a6002a3400d6",
+      "5e0c8743e1ac404290868787",
+      "6051e5987dea46002961f175"
+    ],
+    "relations": [
+      { "index": 0, "level": 0 },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 }
+    ],
+    "_id": "623349845cff15002b41d6a7",
+    "id": "T0017",
+    "name": "RESTtoSFTP",
+    "description": "This is to consume from Rest Entry and write file in external server",
+    "category": "Basic",
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "6051e4bb7dea46002961f174",
+      "6245a811a58004674c0393dd",
+      "6245a8b1a58004674c0393de",
+      "6245ac28a58004674c0393e0"
+    ],
+    "relations": [
+      { "index": 0, "level": 0 },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 },
+      { "index": 3, "level": 3, "parent": 2 }
+    ],
+    "_id": "6245ae5ca58004674c0393e1",
+    "id": "T0018",
+    "name": "FTP to AWS S3",
+    "description": "FTP to AWS S3",
+    "category": "AWS",
+    "__v": 0
+  },
+  {
+    "palettes": [
+      "5dfdf48e1354e409841d7be3",
+      "650471e14630893da82c6dec",
+      "5dfdf67aeeaa430984fe9031",
+      "650471e14630893da82c6dec",
+      "5dfdf67aeeaa430984fe9031",
+      "650472334630893da82c6ded",
+      "5dfdf67aeeaa430984fe9031"
+    ],
+    "relations": [
+      { "index": 0, "level": 0 },
+      { "index": 1, "level": 1, "parent": 0 },
+      { "index": 2, "level": 2, "parent": 1 },
+      { "index": 3, "level": 1, "parent": 0 },
+      { "index": 4, "level": 2, "parent": 3 },
+      { "index": 5, "level": 1, "parent": 0 },
+      { "index": 6, "level": 2, "parent": 5 }
+    ],
+    "_id": "650472be4630893da82c6dee",
+    "id": "T0019",
+    "name": "Switch Outlet",
+    "description": "Switch Outlet",
+    "category": "Basic",
+    "__v": 0
+  },
+  {
+    "palettes": ["5dfdf48e1354e409841d7be3", "650473884630893da82c6def"],
+    "relations": [
+      { "index": 0, "level": 0 },
+      { "index": 1, "level": 1, "parent": 0 }
+    ],
+    "_id": "650473cf4630893da82c6df0",
+    "id": "T0020",
+    "name": "Switch",
+    "description": "Switch",
+    "category": "Basic",
+    "__v": 0
+  }
+]
