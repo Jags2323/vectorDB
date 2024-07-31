@@ -1,7 +1,7 @@
 import os
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 from sentence_transformers import SentenceTransformer
-from util import file_processing
+from . import file_processing
 
 # Function to connect to Milvus
 def _connect_milvus(host="127.0.0.1", port="19530"):
@@ -61,10 +61,10 @@ def _process_file(file_path):
         return file_processing.process_xml_file_by_tag(file_path)
     elif file_path.endswith('.pdf'):
         return file_processing.process_pdf_file(file_path)
-    elif file_path.endswith('.txt') or file_path.endswith('.md'):
-        return file_processing.process_text_file(file_path)
+    elif file_path.endswith('.json'):
+        return file_processing.process_json_file(file_path)
     else:
-        return []
+        return file_processing.process_text_file(file_path)
 
 def generate_and_save_data(path, collection_name, host="127.0.0.1", port="19530", dim=384):
     _connect_milvus(host, port)

@@ -1,6 +1,7 @@
 import fitz
 import xml.etree.ElementTree as ET
 import re
+import json
 
 # Function to process text file
 def process_text_file(file_path):
@@ -60,3 +61,47 @@ def process_xml_file_by_tag(file_path, tag="Device"):
         print(f"Error parsing XML file: {e}")
     
     return text_segments
+
+def process_json_file(file_path):
+    json_segments = []
+    print("started process_json_file")
+    
+    try:
+        with open(file_path, 'r') as file:
+            json_data = file.read()
+        
+        # Check if the JSON data is empty
+        if not json_data.strip():
+            return json_segments
+        
+        # Parse the JSON data
+        data = json.loads(json_data)
+        
+        # Check if the parsed data is a list (array) or a single dictionary (object)
+        if isinstance(data, list):
+            # If it's a list, iterate through each JSON object in the array
+            for obj in data:
+                if obj:  # Check if the object is not empty
+                    # Convert the JSON object to a string
+                    obj_string = json.dumps(obj)
+                    # Remove new lines and excessive spaces
+                    clean_string = re.sub(r'\s+', ' ', obj_string).strip()
+                    json_segments.append(clean_string)
+        elif isinstance(data, dict):
+            # If it's a single JSON object, process it directly if it's not empty
+            if data:
+                obj_string = json.dumps(data)
+                clean_string = re.sub(r'\s+', ' ', obj_string).strip()
+                json_segments.append(clean_string)
+        else:
+            print("Unsupported JSON format")
+            
+    except FileNotFoundError as e:
+        print(f"File not found: {e}")
+    except json.JSONDecodeError as e:
+        print(f"Error parsing JSON: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    
+    print(json_segments)
+    return json_segments
