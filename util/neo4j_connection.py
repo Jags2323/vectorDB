@@ -6,7 +6,7 @@ class Neo4jConnection:
 
     def close(self):
         self.driver.close()
-    
+
     def insert_data(self, data):
         with self.driver.session() as session:
             try:
@@ -18,12 +18,15 @@ class Neo4jConnection:
             except Exception as e:
                 print(f"Failed to insert data into Neo4j: {e}")
 
-    def generate_graph(self):
+    def generate_graph(self, prompt=None):
         with self.driver.session() as session:
             try:
-                result = session.run(
-                    "MATCH (n:Text) RETURN n.content AS content"
-                )
+                query = "MATCH (n:Text) RETURN n.content AS content"
+                if prompt:
+                    # Adapt Cypher query based on prompt (implement logic)
+                    query = f"/* Your Cypher query with prompt filtering goes here */"
+
+                result = session.run(query)
                 graph_data = [record["content"] for record in result]
                 return graph_data
             except Exception as e:
