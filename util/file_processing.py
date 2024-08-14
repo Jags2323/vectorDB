@@ -64,7 +64,7 @@ def process_xml_file_by_tag(file_path, tag="Device"):
 
 def process_json_file(file_path):
     json_segments = []
-    print("started process_json_file")
+    print("Started processing JSON file")
     
     try:
         with open(file_path, 'r') as file:
@@ -77,18 +77,16 @@ def process_json_file(file_path):
         # Parse the JSON data
         data = json.loads(json_data)
         
-        # Check if the parsed data is a list (array) or a single dictionary (object)
+        # Check if the parsed data is a list or a dictionary
         if isinstance(data, list):
-            # If it's a list, iterate through each JSON object in the array
+            # Process each JSON object in the list
             for obj in data:
                 if obj:  # Check if the object is not empty
-                    # Convert the JSON object to a string
                     obj_string = json.dumps(obj)
-                    # Remove new lines and excessive spaces
                     clean_string = re.sub(r'\s+', ' ', obj_string).strip()
                     json_segments.append(clean_string)
         elif isinstance(data, dict):
-            # If it's a single JSON object, process it directly if it's not empty
+            # Process the single JSON object
             if data:
                 obj_string = json.dumps(data)
                 clean_string = re.sub(r'\s+', ' ', obj_string).strip()
