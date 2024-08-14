@@ -100,6 +100,5 @@ def process_json_file(file_path):
         print(f"Error parsing JSON: {e}")
     except Exception as e:
         print(f"An error occurred: {e}")
-    
-    print(json_segments)
+        
     return json_segments

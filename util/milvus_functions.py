@@ -78,7 +78,6 @@ def generate_and_save_data(path, collection_name, host="127.0.0.1", port="19530"
         collection = Collection(collection_name)
     
     text_segments = []
-
     # Check if the provided path is a directory or a single file
     if os.path.isdir(path):
         # Iterate through each file in the folder
@@ -91,7 +90,6 @@ def generate_and_save_data(path, collection_name, host="127.0.0.1", port="19530"
         text_segments.extend(_process_file(path))
     else:
         raise ValueError("The provided path is neither a directory nor a file")
-
     # Vectorize the text_segments
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
     embeddings = [model.encode([text_segment])[0].tolist() for text_segment in text_segments]
