@@ -1,0 +1,514 @@
+[
+  {
+    "_id": "5fda4e3825b31b0029ee3d1e",
+    "name": "Customer Interact",
+    "connection": "CustomerInteract",
+    "type": "AMQ",
+    "defaultAmq": false,
+    "defaultWmq": true,
+    "defaultKafka": true,
+    "defaultFtp": true,
+    "defaultRest": true,
+    "defaultShare": true,
+    "defaultPgp": true,
+    "amq": {
+      "amqUrl": "tcp://activemq-artemis:61616",
+      "username": "artemis",
+      "password": "simetraehcapa"
+    },
+    "wmq": {
+      "wmqHost": "",
+      "wmqQueMgr": "",
+      "wmqChannel": "",
+      "wmqPort": null,
+      "username": "",
+      "password": ""
+    },
+    "kafka": { "username": "", "password": "" },
+    "ftp": {
+      "ftpPortocol": "",
+      "ftpToken": "",
+      "ftpHost": "",
+      "ftpPort": "",
+      "username": "",
+      "password": ""
+    },
+    "rest": {
+      "restToken": "",
+      "restEndpoint": "",
+      "username": "",
+      "password": ""
+    },
+    "fileShare": { "fileLocation": "", "username": "", "password": "" },
+    "pgp": {
+      "name": "CustomerInteract",
+      "publicKeyData": "",
+      "privateKeyData": "",
+      "privateKey": false,
+      "username": "",
+      "password": "",
+      "enabled": false
+    },
+    "__v": 0,
+    "connectors": {
+      "AMQ1": {
+        "amqUrl": "tcp://activemq-artemis:61616",
+        "username": "artemis",
+        "password": "simetraehcapa",
+        "type": "AMQ",
+        "key": "AMQ1",
+        "id": "AMQ1"
+      },
+      "SFTPServer": {
+        "id": "",
+        "type": "FILE",
+        "key": "SFTPServer",
+        "protocol": "sftp",
+        "host": "169.63.147.125",
+        "port": 22,
+        "authentication": "Key",
+        "username": "admin",
+        "password": "",
+        "keyPath": "/root/.ssh/id_rsa",
+        "sharedPath": ""
+      }
+    }
+  },
+  {
+    "_id": "5fda4e4325b31b0029ee3d1f",
+    "name": "Sourcing",
+    "connection": "Sourcing",
+    "type": "WMQ",
+    "defaultAmq": true,
+    "defaultWmq": false,
+    "defaultKafka": true,
+    "defaultFtp": true,
+    "defaultRest": true,
+    "defaultShare": true,
+    "defaultPgp": true,
+    "amq": { "amqUrl": "", "username": "", "password": "" },
+    "wmq": {
+      "wmqHost": "mq-ibm-mq",
+      "wmqQueMgr": "mq",
+      "wmqChannel": "DEV.ADMIN.SVRCONN",
+      "wmqPort": 1414,
+      "username": "admin",
+      "password": "Miracle@1234"
+    },
+    "kafka": { "username": "", "password": "" },
+    "ftp": {
+      "ftpPortocol": "",
+      "ftpToken": "",
+      "ftpHost": "",
+      "ftpPort": null,
+      "username": "",
+      "password": ""
+    },
+    "rest": {
+      "restToken": "",
+      "restEndpoint": "",
+      "username": "",
+      "password": ""
+    },
+    "fileShare": { "fileLocation": "", "username": "", "password": "" },
+    "pgp": {
+      "name": "Sourcing",
+      "publicKeyData": "",
+      "privateKeyData": "",
+      "privateKey": false,
+      "username": "",
+      "password": ""
+    },
+    "__v": 0,
+    "connectors": {
+      "WMQ1": {
+        "wmqHost": "mq-ibm-mq",
+        "wmqChannel": "DEV.ADMIN.SVRCONN",
+        "wmqQueueManager": "",
+        "wmqPort": 1414,
+        "username": "admin",
+        "password": "Miracle@1234",
+        "type": "WMQ",
+        "key": "WMQ1",
+        "wmqQueMgr": "mq",
+        "id": "WMQ1"
+      }
+    }
+  },
+  {
+    "_id": "5fda4e5c25b31b0029ee3d20",
+    "name": "Procurement",
+    "connection": "Procurement",
+    "type": "Default",
+    "defaultAmq": true,
+    "defaultWmq": true,
+    "defaultKafka": true,
+    "defaultFtp": true,
+    "defaultRest": true,
+    "defaultShare": true,
+    "defaultPgp": true,
+    "amq": { "amqUrl": "", "username": "", "password": "" },
+    "wmq": {
+      "wmqHost": "",
+      "wmqQueMgr": "",
+      "wmqChannel": "",
+      "wmqPort": null,
+      "username": "",
+      "password": ""
+    },
+    "kafka": { "username": "", "password": "" },
+    "ftp": {
+      "ftpPortocol": "",
+      "ftpToken": "",
+      "ftpHost": "",
+      "ftpPort": null,
+      "username": "",
+      "password": ""
+    },
+    "rest": {
+      "restToken": "",
+      "restEndpoint": "",
+      "username": "",
+      "password": ""
+    },
+    "fileShare": { "fileLocation": "", "username": "", "password": "" },
+    "pgp": {
+      "name": "",
+      "publicKeyData": "",
+      "privateKeyData": "",
+      "privateKey": false,
+      "username": "",
+      "password": ""
+    },
+    "__v": 0,
+    "connectors": {
+      "CloudMQ": {
+        "id": "",
+        "type": "WMQ",
+        "key": "CloudMQ",
+        "wmqHost": "mq-ibm-mq",
+        "wmqChannel": "DEV.ADMIN.SVRCONN",
+        "wmqQueueManager": "mq",
+        "wmqPort": "1414",
+        "username": "admin",
+        "password": "my-admin-password"
+      },
+      "SharedPath": {
+        "protocol": "localShare",
+        "host": "",
+        "port": 22,
+        "authentication": "Password",
+        "username": "",
+        "password": "",
+        "keyPath": "",
+        "sharedPath": "Procurement/fileTriggerPattern",
+        "id": "SharedPath",
+        "type": "FILE",
+        "key": "SharedPath"
+      }
+    }
+  },
+  {
+    "_id": "5fda4e6425b31b0029ee3d21",
+    "name": "Order Processing",
+    "connection": "OrderProcessing",
+    "type": "Default",
+    "defaultAmq": true,
+    "defaultWmq": true,
+    "defaultKafka": true,
+    "defaultFtp": true,
+    "defaultRest": true,
+    "defaultShare": true,
+    "amq": { "amqUrl": "", "username": "", "password": "" },
+    "wmq": {
+      "wmqHost": "",
+      "wmqQueMgr": "",
+      "wmqChannel": "",
+      "wmqPort": null,
+      "username": "",
+      "password": ""
+    },
+    "kafka": { "username": "", "password": "" },
+    "ftp": {
+      "ftpPortocol": "",
+      "ftpToken": "",
+      "ftpHost": "",
+      "ftpPort": null,
+      "username": "",
+      "password": ""
+    },
+    "rest": {
+      "restToken": "",
+      "restEndpoint": "",
+      "username": "",
+      "password": ""
+    },
+    "fileShare": { "fileLocation": "", "username": "", "password": "" },
+    "pgp": {
+      "name": "OrderProcessing",
+      "publicKeyData": "-----BEGIN PUBLIC KEY-----\r\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv7PAXC65k3rTFvdbk8gLcvIzGyaKFQCXo3yY39H68J9/vWZvJdYoAihERl4jjCjHJe51/S0fj7oOaSJSeeDu\r\nnvnolqlWROPyzCcTbj5AGVH9AXZYukc8kbg1vVPTTEVVLmYTvguxCFzGgzTmI0YI\r\ndiwIyiLT5wuBNQQrIGdq0Q2JVFnSPSGsXNT2HKCoJIuuysZaoho7T8rr0QdHZnZJ\r\npu2cxd3c0JUMd6Nt3fkAgiEggqCnUz476XsNWf+ybmU/ADnpW8CnyT9iHTChgrYv\r\nFlS8GvMGfr1X4Uha91DzmdYZB3d1/WniVlU3ak+zwDOTmFMYQgdJuDiBXJphgZxY\r\nhwIDAQAB\r\n-----END PUBLIC KEY-----",
+      "privateKeyData": "-----BEGIN RSA PRIVATE KEY-----\r\nMIIEpAIBAAKCAQEAv7PAXC65k3rTFvdbk8gLcvIzGyaKFQCXo3yY39H68J9/vWZv\r\nJdYoAihERl4jjCjHJe51/S0fj7oOaSJSeeDunvnolqlWROPyzCcTbj5AGVH9AXZY\r\nukc8kbg1vVPTTEVVLmYTvguxCFzGgzTmI0YIdiwIyiLT5wuBNQQrIGdq0Q2JVFnSPSGsXNT2HKCoJIuuysZaoho7T8rr0QdHZnZJpu2cxd3c0JUMd6Nt3fkAgiEggqCn\r\nUz476XsNWf+ybmU/ADnpW8CnyT9iHTChgrYvFlS8GvMGfr1X4Uha91DzmdYZB3d1\r\n/WniVlU3ak+zwDOTmFMYQgdJuDiBXJphgZxYhwIDAQABAoIBAQCgMif3YJx3n9Yy\r\nhPakIjFfFwKaF7SgJGSTnBVsRF69Iaxvq+AJ8FJyqw+S9iwifhkdm45ByalsRACy\r\n3pmpe8wsUY6KCGwtGYfWDnlwUNjjz93rkOhIkisNYrCVzCzwuaebJHYvBDomUNEa\r\n5+PBak674cRelogZtUV99kPLymA63O5csHUhjnIEWs/U0LRkXM+plV/sOSGQVwtj\r\ndzxF2dkqABt1vVEGXuAvg0v/IhrpNMvZbSGRs6nm5PB7X/hl3S3WNzDyAMTobpQo\r\nkBtjIJAuv5IW1Y8MQqeHqI+2Ktj6F+QOp70+qGHOuHnJaQbiKjMtiRX5/rONdVV0\r\nPdObeLshAoGBAPgRhtKQxZINoPz+3d58FTmgU6foGf4+ho+8/1lXtuLWzTLhK3ML\r\nY0c70btFgnP9sRkXEhtIOmUvn7aVDOW9AIlrUVQ/eA6pnCTK7JeK42J7JGD5f8/HTxlDYpTUwyT8llzABli3EjEAAPEhaZQA5u2cY3/0pH4x+lk246rYpa/JAoGBAMXU\r\n2+i2X9gkyu2qZxkGYpm+/yYCYl/k+oYK/NpMYlj8mkKLcI5hxQpgRdTgNxRI58h0\r\nWXptBdKU8/BQSootMWw+HkIbDQXdLdClEUP2cKYSykMvswn7qPmjrx+Zp+ddm3AS\r\n675wIjvV5KWPQTME4MGVTYZ4DQyhD4Bwo47zBg3PAoGAVUDYv+bnL3GloS0KHRsx\r\nxDM4bN0Uic79OcrvSsodXUoLDXBbGVeRj/qb8qtJ0Qkf4wqNu3iQMRQz5HDHFPFm\r\njNOoCLcjUI6zzeU7eD1QNhkyAG3eog7SPVFuQM36Huz70/ZeeAC6rMJekIA2I5pH\r\nwuNbQq9WFNSiQCTgC2gXURkCgYEArBRhTOUGLY6jbWPh1eS186ItcjR0uZEFUX9R\r\nPdlfWqQu0l9UAqWMrV/cnjSB9IUOCFEcW99lRy0Fmy1cCSEScmL+EuZQx58CcRCE\r\nGifNCMgjY5mkFLTw4GS+ubAAWsITqMLsiHQlcwK0pkYbonNFxV1HWAYo46ldQI25\r\n12gRBgUCgYAR5iPkQoeRMAZJUYjourRZ3X+pJHr25KdrclXVz4Rx6kSGgWLHxSmH\r\nV2yBoLfFiIZQcm7tqfUJoijtzsXFEm4xHYJTviLUyUVBiAdVxW1b7yiHFSz5+BPB\r\nlKhs6fEuz7kW4iKc689l3lRKH9SZ3OQ29VZ++vytkqyMsGFBCRJ+bg==\r\n-----END RSA PRIVATE KEY-----",
+      "privateKey": true,
+      "username": "syam",
+      "password": "mints",
+      "enabled": true,
+      "ind": {
+        "name": "OrderProcessing",
+        "publicKeyData": "-----BEGIN PUBLIC KEY-----\r\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv7PAXC65k3rTFvdbk8gLcvIzGyaKFQCXo3yY39H68J9/vWZvJdYoAihERl4jjCjHJe51/S0fj7oOaSJSeeDu\r\nnvnolqlWROPyzCcTbj5AGVH9AXZYukc8kbg1vVPTTEVVLmYTvguxCFzGgzTmI0YI\r\ndiwIyiLT5wuBNQQrIGdq0Q2JVFnSPSGsXNT2HKCoJIuuysZaoho7T8rr0QdHZnZJ\r\npu2cxd3c0JUMd6Nt3fkAgiEggqCnUz476XsNWf+ybmU/ADnpW8CnyT9iHTChgrYv\r\nFlS8GvMGfr1X4Uha91DzmdYZB3d1/WniVlU3ak+zwDOTmFMYQgdJuDiBXJphgZxY\r\nhwIDAQAB\r\n-----END PUBLIC KEY-----",
+        "privateKeyData": "",
+        "privateKey": true,
+        "username": "",
+        "password": "",
+        "enabled": true
+      }
+    },
+    "__v": 0,
+    "defaultPgp": true,
+    "connectors": {
+      "OrdersMQ": {
+        "amqUrl": "tcp://activemq-artemis:61616",
+        "username": "atemis",
+        "password": "simetraehcapa",
+        "key": "OrdersMQ",
+        "type": "AMQ",
+        "id": ""
+      },
+      "LocalPath": {
+        "id": "",
+        "type": "FILE",
+        "key": "LocalPath",
+        "protocol": "localShare",
+        "host": "",
+        "port": 22,
+        "authentication": "Password",
+        "username": "",
+        "password": "",
+        "keyPath": "",
+        "sharedPath": "orderProcessing/fileTriggerPattern"
+      }
+    }
+  },
+  {
+    "_id": "5fda4e7125b31b0029ee3d22",
+    "name": "Order Fulfillment",
+    "connection": "OrderFulfillment",
+    "type": "Default",
+    "defaultAmq": true,
+    "defaultWmq": true,
+    "defaultKafka": true,
+    "defaultFtp": true,
+    "defaultRest": true,
+    "defaultShare": true,
+    "defaultPgp": true,
+    "amq": { "amqUrl": "", "username": "", "password": "" },
+    "wmq": {
+      "wmqHost": "",
+      "wmqQueMgr": "",
+      "wmqChannel": "",
+      "wmqPort": null,
+      "username": "",
+      "password": ""
+    },
+    "kafka": { "username": "", "password": "" },
+    "ftp": {
+      "ftpPortocol": "",
+      "ftpToken": "",
+      "ftpHost": "",
+      "ftpPort": null,
+      "username": "",
+      "password": ""
+    },
+    "rest": {
+      "restToken": "",
+      "restEndpoint": "",
+      "username": "",
+      "password": ""
+    },
+    "fileShare": { "fileLocation": "", "username": "", "password": "" },
+    "pgp": {
+      "name": "",
+      "publicKeyData": "",
+      "privateKeyData": "",
+      "privateKey": false,
+      "username": "",
+      "password": ""
+    },
+    "__v": 0,
+    "connectors": {
+      "AWSS31": {
+        "id": "AWS-S31",
+        "type": "AWSS3",
+        "key": "AWSS31",
+        "bucket": "MINTS-Bucket",
+        "region": "US_REGION_01",
+        "accessKey": "asdf",
+        "secretKey": "asdf"
+      }
+    }
+  },
+  {
+    "_id": "5fda4e8225b31b0029ee3d23",
+    "name": "Order Shipping",
+    "connection": "OrderShipping",
+    "type": "Default",
+    "defaultAmq": true,
+    "defaultWmq": true,
+    "defaultKafka": true,
+    "defaultFtp": true,
+    "defaultRest": true,
+    "defaultShare": true,
+    "amq": { "amqUrl": "", "username": "", "password": "" },
+    "wmq": {
+      "wmqHost": "",
+      "wmqQueMgr": "",
+      "wmqChannel": "",
+      "wmqPort": null,
+      "username": "",
+      "password": ""
+    },
+    "kafka": { "username": "", "password": "" },
+    "ftp": {
+      "ftpPortocol": "",
+      "ftpToken": "",
+      "ftpHost": "",
+      "ftpPort": null,
+      "username": "",
+      "password": ""
+    },
+    "rest": {
+      "restToken": "",
+      "restEndpoint": "",
+      "username": "",
+      "password": ""
+    },
+    "fileShare": { "fileLocation": "", "username": "", "password": "" },
+    "pgp": {
+      "name": "OrderShipping",
+      "publicKeyData": "",
+      "privateKeyData": "",
+      "privateKey": true,
+      "username": "Syamk",
+      "password": "mints"
+    },
+    "__v": 0,
+    "defaultPgp": false,
+    "connectors": {
+      "OrdersAmq": {
+        "amqUrl": "http://OrdersAmq.miracle.com",
+        "username": "asdf",
+        "password": "adsf",
+        "key": "OrdersAmq",
+        "type": "AMQ",
+        "id": ""
+      }
+    }
+  },
+  {
+    "_id": "62542116f7e8ba572cb71904",
+    "name": "Test",
+    "connection": "Test",
+    "type": "Default",
+    "defaultAmq": true,
+    "defaultWmq": true,
+    "defaultKafka": true,
+    "defaultFtp": true,
+    "defaultRest": true,
+    "defaultShare": true,
+    "defaultPgp": true,
+    "defaultEncoding": true,
+    "amq": { "amqUrl": "", "username": "", "password": "" },
+    "wmq": {
+      "wmqHost": "",
+      "wmqQueMgr": "",
+      "wmqChannel": "",
+      "wmqPort": null,
+      "username": "",
+      "password": ""
+    },
+    "kafka": {
+      "kafkaHost": "",
+      "kafkaPort": null,
+      "kafkaZooKeeperHost": "",
+      "kafkaZooKeeperPort": null,
+      "username": "",
+      "password": ""
+    },
+    "ftp": {
+      "ftpProtocol": "",
+      "ftpToken": "",
+      "ftpHost": "",
+      "ftpPort": null,
+      "username": "",
+      "password": ""
+    },
+    "rest": {
+      "restToken": "",
+      "restEndpoint": "",
+      "username": "",
+      "password": ""
+    },
+    "fileShare": { "fileLocation": "", "username": "", "password": "" },
+    "pgp": {
+      "name": "Test",
+      "publicKeyData": "-----BEGIN PUBLIC KEY-----\r\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv7PAXC65k3rTFvdbk8gLcvIzGyaKFQCXo3yY39H68J9/vWZvJdYoAihERl4jjCjHJe51/S0fj7oOaSJSeeDu\r\nnvnolqlWROPyzCcTbj5AGVH9AXZYukc8kbg1vVPTTEVVLmYTvguxCFzGgzTmI0YI\r\ndiwIyiLT5wuBNQQrIGdq0Q2JVFnSPSGsXNT2HKCoJIuuysZaoho7T8rr0QdHZnZJ\r\npu2cxd3c0JUMd6Nt3fkAgiEggqCnUz476XsNWf+ybmU/ADnpW8CnyT9iHTChgrYv\r\nFlS8GvMGfr1X4Uha91DzmdYZB3d1/WniVlU3ak+zwDOTmFMYQgdJuDiBXJphgZxY\r\nhwIDAQAB\r\n-----END PUBLIC KEY-----",
+      "privateKeyData": "-----BEGIN RSA PRIVATE KEY-----\r\nMIIEpAIBAAKCAQEAv7PAXC65k3rTFvdbk8gLcvIzGyaKFQCXo3yY39H68J9/vWZv\r\nJdYoAihERl4jjCjHJe51/S0fj7oOaSJSeeDunvnolqlWROPyzCcTbj5AGVH9AXZY\r\nukc8kbg1vVPTTEVVLmYTvguxCFzGgzTmI0YIdiwIyiLT5wuBNQQrIGdq0Q2JVFnSPSGsXNT2HKCoJIuuysZaoho7T8rr0QdHZnZJpu2cxd3c0JUMd6Nt3fkAgiEggqCn\r\nUz476XsNWf+ybmU/ADnpW8CnyT9iHTChgrYvFlS8GvMGfr1X4Uha91DzmdYZB3d1\r\n/WniVlU3ak+zwDOTmFMYQgdJuDiBXJphgZxYhwIDAQABAoIBAQCgMif3YJx3n9Yy\r\nhPakIjFfFwKaF7SgJGSTnBVsRF69Iaxvq+AJ8FJyqw+S9iwifhkdm45ByalsRACy\r\n3pmpe8wsUY6KCGwtGYfWDnlwUNjjz93rkOhIkisNYrCVzCzwuaebJHYvBDomUNEa\r\n5+PBak674cRelogZtUV99kPLymA63O5csHUhjnIEWs/U0LRkXM+plV/sOSGQVwtj\r\ndzxF2dkqABt1vVEGXuAvg0v/IhrpNMvZbSGRs6nm5PB7X/hl3S3WNzDyAMTobpQo\r\nkBtjIJAuv5IW1Y8MQqeHqI+2Ktj6F+QOp70+qGHOuHnJaQbiKjMtiRX5/rONdVV0\r\nPdObeLshAoGBAPgRhtKQxZINoPz+3d58FTmgU6foGf4+ho+8/1lXtuLWzTLhK3ML\r\nY0c70btFgnP9sRkXEhtIOmUvn7aVDOW9AIlrUVQ/eA6pnCTK7JeK42J7JGD5f8/HTxlDYpTUwyT8llzABli3EjEAAPEhaZQA5u2cY3/0pH4x+lk246rYpa/JAoGBAMXU\r\n2+i2X9gkyu2qZxkGYpm+/yYCYl/k+oYK/NpMYlj8mkKLcI5hxQpgRdTgNxRI58h0\r\nWXptBdKU8/BQSootMWw+HkIbDQXdLdClEUP2cKYSykMvswn7qPmjrx+Zp+ddm3AS\r\n675wIjvV5KWPQTME4MGVTYZ4DQyhD4Bwo47zBg3PAoGAVUDYv+bnL3GloS0KHRsx\r\nxDM4bN0Uic79OcrvSsodXUoLDXBbGVeRj/qb8qtJ0Qkf4wqNu3iQMRQz5HDHFPFm\r\njNOoCLcjUI6zzeU7eD1QNhkyAG3eog7SPVFuQM36Huz70/ZeeAC6rMJekIA2I5pH\r\nwuNbQq9WFNSiQCTgC2gXURkCgYEArBRhTOUGLY6jbWPh1eS186ItcjR0uZEFUX9R\r\nPdlfWqQu0l9UAqWMrV/cnjSB9IUOCFEcW99lRy0Fmy1cCSEScmL+EuZQx58CcRCE\r\nGifNCMgjY5mkFLTw4GS+ubAAWsITqMLsiHQlcwK0pkYbonNFxV1HWAYo46ldQI25\r\n12gRBgUCgYAR5iPkQoeRMAZJUYjourRZ3X+pJHr25KdrclXVz4Rx6kSGgWLHxSmH\r\nV2yBoLfFiIZQcm7tqfUJoijtzsXFEm4xHYJTviLUyUVBiAdVxW1b7yiHFSz5+BPB\r\nlKhs6fEuz7kW4iKc689l3lRKH9SZ3OQ29VZ++vytkqyMsGFBCRJ+bg==\r\n-----END RSA PRIVATE KEY-----",
+      "privateKey": true,
+      "username": "asdf",
+      "password": "asdf",
+      "enabled": true,
+      "ind": {
+        "name": "Test",
+        "publicKeyData": "-----BEGIN PUBLIC KEY-----\r\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv7PAXC65k3rTFvdbk8gLcvIzGyaKFQCXo3yY39H68J9/vWZvJdYoAihERl4jjCjHJe51/S0fj7oOaSJSeeDu\r\nnvnolqlWROPyzCcTbj5AGVH9AXZYukc8kbg1vVPTTEVVLmYTvguxCFzGgzTmI0YI\r\ndiwIyiLT5wuBNQQrIGdq0Q2JVFnSPSGsXNT2HKCoJIuuysZaoho7T8rr0QdHZnZJ\r\npu2cxd3c0JUMd6Nt3fkAgiEggqCnUz476XsNWf+ybmU/ADnpW8CnyT9iHTChgrYv\r\nFlS8GvMGfr1X4Uha91DzmdYZB3d1/WniVlU3ak+zwDOTmFMYQgdJuDiBXJphgZxY\r\nhwIDAQAB\r\n-----END PUBLIC KEY-----",
+        "privateKeyData": "",
+        "privateKey": true,
+        "username": "",
+        "password": "",
+        "enabled": true
+      }
+    },
+    "__v": 0,
+    "connectors": {
+      "AMQ1": {
+        "id": "",
+        "type": "AMQ",
+        "key": "AMQ1",
+        "amqUrl": "amqurl",
+        "username": "sdfsdf",
+        "password": "asdf"
+      },
+      "WMQ2": {
+        "id": "",
+        "type": "WMQ",
+        "key": "WMQ2",
+        "wmqHost": "wmqip",
+        "wmqChannel": "channnel",
+        "wmqQueueManager": "qmgr",
+        "wmqPort": "1414",
+        "username": "asdf",
+        "password": "asdf"
+      },
+      "FILE3": {
+        "id": "",
+        "type": "FILE",
+        "key": "FILE3",
+        "protocol": "localShare",
+        "host": "",
+        "port": 22,
+        "authentication": "Password",
+        "username": "",
+        "password": "",
+        "keyPath": "",
+        "sharedPath": "/test/incoming"
+      },
+      "AWSS34": {
+        "id": "",
+        "type": "AWSS3",
+        "key": "AWSS34",
+        "bucket": "s3bucket",
+        "region": "us",
+        "accessKey": "asdf",
+        "secretKey": "asdf"
+      }
+    }
+  }
+]

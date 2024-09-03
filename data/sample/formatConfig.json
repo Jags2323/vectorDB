@@ -1,0 +1,552 @@
+[
+  {
+    "outputs": [],
+    "_id": "5e0a0fead246b027b8a70843",
+    "version": "v0",
+    "palette": "5dfdf48e1354e409841d7be3",
+    "inputs": {
+      "InletQueue": { "type": "text", "value": "" },
+      "InletEncoding": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "None": "",
+          "Encode": "<marshal ref=\"baseWith64\"><base64 /></marshal>",
+          "Decode": "<unmarshal ref=\"baseWith64\"><base64 /></unmarshal>"
+        }
+      },
+      "InletThreadCount": { "type": "text", "value": "" }
+    },
+    "xml": {
+      "tag": "from",
+      "value": "<from uri=\"[SourceAppConnKey]:queue:[InletQueue]?concurrentConsumers=[InletThreadCount]&amp;selector=MINTID%3D'[INTID]'\" />"
+    },
+    "__v": 0
+  },
+  {
+    "outputs": [
+      {
+        "file": "[INTID].xml",
+        "data": "<route id=\"[INTID]\">[from][InletEncoding][trans][OutletEncoding][to]</route>"
+      }
+    ],
+    "_id": "5e0a101bd246b027b8a70844",
+    "version": "v0",
+    "palette": "5dfdf67aeeaa430984fe9031",
+    "inputs": {
+      "InletQueue": { "type": "text", "value": "" },
+      "InletEncoding": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "None": "",
+          "Encode": "<marshal ref=\"baseWith64\"><base64 /></marshal>",
+          "Decode": "<unmarshal ref=\"baseWith64\"><base64 /></unmarshal>"
+        }
+      },
+      "OutletEncoding": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "None": "",
+          "Encode": "<marshal ref=\"baseWith64\">base64</marshal>",
+          "Decode": "<unmarshal ref=\"baseWith64\">base64</unmarshal>"
+        }
+      },
+      "OutletQueue": { "type": "text", "value": "" },
+      "RESTEnable": {
+        "type": "boolean",
+        "value": "",
+        "options": { "false": "to", "true": "wireTap" }
+      }
+    },
+    "xml": {
+      "tag": "to",
+      "value": "<[RESTEnable] uri=\"[TargetAppConnKey]:[OutletType]:[OutletQueue]\" /> "
+    },
+    "__v": 0
+  },
+  {
+    "outputs": [
+      {
+        "file": "[INTID].xml",
+        "data": "<route id=\"[INTID]\"><from uri=\"[SourceAppConnKey]:queue:[InletQueue]?selector=MINTID%3D'[INTID]'\" /><to uri=\"audit:Inlet?level=info\"/><setHeader name=\"mapName\"><simple>[Mapname]</simple></setHeader><setHeader name=\"endpoint\"><simple>[TargetAppConnKey]:queue:[Endpoint]</simple></setHeader><to uri=\"audit:SetParams?level=info\"/><to uri=\"[TransInletQueue]\"/><to uri=\"audit:Transform?level=info\"/></route>"
+      },
+      {
+        "file": "[INTID]ITX.xml",
+        "data": "<route id=\"[INTID]ITX\"><from uri=\"[TransInletQueue]?selector=MINTID%3D'[INTID]'\" /><to uri=\"audit:Inlet?level=info\"/><process ref=\"[TransformationService]\" /><to uri=\"audit:ItxProcessor?level=info\"/><recipientList><header>endpoint</header></recipientList><to uri=\"audit:Outlet?level=info\"/></route>"
+      }
+    ],
+    "_id": "5e0c8653e1ac404290868786",
+    "version": "v0",
+    "palette": "5e0c8743e1ac404290868787",
+    "inputs": {
+      "InletQueue": { "type": "text", "value": "" },
+      "Mapname": { "type": "text", "value": "" },
+      "Endpoint": { "type": "text", "value": "" },
+      "TransInletQueue": { "type": "text", "value": "" },
+      "TransformationService": { "type": "text", "value": "" }
+    },
+    "__v": 0,
+    "xml": {
+      "tag": "trans",
+      "header": "<setHeader name=\"mapName\"><simple>[Mapname]</simple></setHeader>",
+      "value": "<process ref=\"[TransformationService]\" />"
+    }
+  },
+  {
+    "outputs": [],
+    "_id": "5e760e37008f821ea4a5b854",
+    "version": "v0",
+    "palette": "5e75e0e317f68b5028216375",
+    "inputs": {
+      "FileSourcePath": { "type": "text", "value": "" },
+      "FileArchive": {
+        "type": "boolean",
+        "value": "",
+        "options": {
+          "false": "",
+          "true": "move=[AppDataPath][FileArchivePath]/${file:name}[FileAppendDate]"
+        }
+      },
+      "FileArchivePath": { "type": "text", "value": "" },
+      "FileAppendDate": {
+        "type": "boolean",
+        "value": "",
+        "options": { "false": "", "true": "_${date:now:yyyyMMdd}" }
+      },
+      "FileTriggerExt": {
+        "type": "format",
+        "value": "",
+        "format": "&amp;doneFileName=${file:name.noext}[FileTriggerExt]"
+      },
+      "FileDelete": {
+        "type": "boolean",
+        "value": "",
+        "options": { "false": "", "true": "&amp;delete=true" }
+      },
+      "FileDataExt": {
+        "type": "format",
+        "value": "",
+        "format": "antInclude=*[FileDataExt]"
+      }
+    },
+    "xml": {
+      "tag": "from",
+      "value": "<from uri=\"file:[AppDataPath][FileSourcePath]?[FileArchive][FileDataExt][FileTriggerExt][FileDelete]&amp;readLock=changed\" />"
+    },
+    "__v": 0
+  },
+  {
+    "outputs": [
+      {
+        "file": "[INTID].xml",
+        "data": "<route id=\"[INTID]\">[from][InletEncoding][trans][OutletEncoding][to]</route>"
+      }
+    ],
+    "_id": "5e762e1c008f821ea4a5b855",
+    "version": "v0",
+    "palette": "5e762cd717f68b5028216377",
+    "inputs": {
+      "TargetFilePath": { "type": "text", "value": "" },
+      "TargetFilePattern": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "Static": "[TargetFilename]",
+          "Dynamic": "[TargetFilename]_${date:now:yyyyMMddHHmmssSSS}",
+          "Queue Header": "${header.filename}_${date:now:yyyyMMddHHmmssSSS}"
+        }
+      },
+      "TargetFilename": { "type": "text", "value": "" },
+      "TargetFileExtension": { "type": "text", "value": "" },
+      "FilePreDestExit": {
+        "type": "objectList",
+        "value": "",
+        "format": "<setHeader name=\"exitName\"><simple>[ObjKey]</simple></setHeader><setHeader name=\"params\"><simple>[ObjValue]</simple></setHeader><process ref=\"fteExitsProcessor\" />"
+      },
+      "FilePostDestExit": {
+        "type": "objectList",
+        "value": "",
+        "format": "<setHeader name=\"exitName\"><simple>[ObjKey]</simple></setHeader><setHeader name=\"params\"><simple>[ObjValue]</simple></setHeader><process ref=\"fteExitsProcessor\" />"
+      },
+      "OutletEncoding": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "None": "",
+          "Encode": "<marshal ref=\"baseWith64\">base64</marshal>",
+          "Decode": "<unmarshal ref=\"baseWith64\">base64</unmarshal>"
+        }
+      }
+    },
+    "xml": {
+      "tag": "to",
+      "value": "[FilePreDestExit]<to uri=\"file:[AppDataPath][TargetFilePath]?fileName=[TargetFilePattern][TargetFileExtension]\" />[FilePostDestExit]"
+    },
+    "__v": 0
+  },
+  {
+    "outputs": [
+      {
+        "file": "[INTID].xml",
+        "data": "<route id=\"[INTID]\">[from][InletEncoding][to]</route>"
+      }
+    ],
+    "_id": "5e76749d19f65c3ae89f611a",
+    "version": "v0",
+    "palette": "5e76712217f68b5028216378",
+    "inputs": {
+      "KafkaTopic": { "type": "text", "value": "" },
+      "KafkaBroker": { "type": "text", "value": "" }
+    },
+    "xml": {
+      "tag": "to",
+      "value": "<to uri=\"kafka:[KafkaTopic]?brokers=[KafkaBroker]\" />"
+    },
+    "__v": 0
+  },
+  {
+    "outputs": [],
+    "_id": "5e774de07db10856a8720b4a",
+    "version": "v0",
+    "palette": "5e29d0359b1e883db8e5e8a2",
+    "inputs": { "XsltMapName": { "type": "text", "value": "" } },
+    "xml": {
+      "tag": "trans",
+      "value": "<to uri=\"xslt:file:routes/xslt/maps/[XsltMapName].xslt\" />"
+    },
+    "__v": 0
+  },
+  {
+    "outputs": [],
+    "_id": "5f2964bc163ee142e8be5ce2",
+    "version": "v0",
+    "palette": "5e29d2d49b1e883db8e5e8a4",
+    "inputs": {
+      "RESTEndpoint": { "type": "text", "value": "" },
+      "RESTHttpMethod": {
+        "type": "format",
+        "value": "",
+        "format": "<setHeader name=\"CamelHttpMethod\"><constant>[RESTHttpMethod]</constant></setHeader>"
+      },
+      "RESTAuthMethod": {
+        "type": "format",
+        "value": "",
+        "format": "authMethod=[RESTAuthMethod]"
+      },
+      "RESTAuthUsername": {
+        "type": "format",
+        "value": "",
+        "format": "&amp;authUsername=[RESTAuthUsername]"
+      },
+      "RESTAuthPassword": {
+        "type": "format",
+        "value": "",
+        "format": "&amp;authPassword=[RESTAuthPassword]"
+      },
+      "RESTAuthToken": {
+        "type": "format",
+        "value": "",
+        "format": "&amp;authToken=[RESTAuthToken]"
+      },
+      "RESTContentType": {
+        "type": "format",
+        "value": "",
+        "format": "<setHeader name=\"Content-Type\"><constant>application/[RESTContentType]</constant></setHeader>"
+      },
+      "RESTAccept": {
+        "type": "format",
+        "value": "",
+        "format": "<setHeader name=\"accept\"><constant>application/[RESTAccept]</constant></setHeader>"
+      },
+      "RESTHeaders": {
+        "type": "object",
+        "value": "",
+        "format": "<setHeader name=\"[ObjKey]\"><constant>[ObjValue]</constant></setHeader>"
+      }
+    },
+    "xml": {
+      "tag": "trans",
+      "header": "[RESTHttpMethod][RESTContentType][RESTAccept][RESTHeaders]",
+      "value": "<to uri=\"[RESTEndpoint]\"/>"
+    },
+    "__v": 0
+  },
+  {
+    "outputs": [
+      {
+        "file": "[INTID].xml",
+        "data": "<route id=\"[INTID]\"><from uri=\"[SourceAppConnKey]:queue:[InletQueue]?selector=MINTID%3D'[INTID]'\" /><to uri=\"audit:Inlet?level=info\"/><setHeader name=\"mapName\"><simple>[MTXMapname]</simple></setHeader><setHeader name=\"projectPath\"><simple>[MTXProjectPath]</simple></setHeader><setHeader name=\"endpoint\"><simple>[TargetAppConnKey]:queue:[MTXEndpoint]</simple></setHeader><to uri=\"audit:SetParams?level=info\"/><to uri=\"[TransInletQueue]\"/><to uri=\"audit:Transform?level=info\"/></route>"
+      },
+      {
+        "file": "[INTID]MTX.xml",
+        "data": "<route id=\"[INTID]MTX\"><from uri=\"[TransInletQueue]?selector=MINTID%3D'[INTID]'\" /><to uri=\"audit:Inlet?level=info\"/><process ref=\"[MTXService]\" /><to uri=\"audit:MTXProcessor?level=info\"/><recipientList><header>endpoint</header></recipientList><to uri=\"audit:Outlet?level=info\"/></route>"
+      }
+    ],
+    "_id": "5fc91af5e792b3002a1b635a",
+    "version": "v0",
+    "palette": "5e29d15a9b1e883db8e5e8a3",
+    "inputs": {
+      "InletQueue": { "type": "text", "value": "" },
+      "MTXMapname": { "type": "text", "value": "" },
+      "MTXProjectPath": { "type": "text", "value": "" },
+      "MTXEndpoint": { "type": "text", "value": "" },
+      "TransInletQueue": { "type": "text", "value": "" },
+      "TransformationService": { "type": "text", "value": "" }
+    },
+    "__v": 0,
+    "xml": {
+      "tag": "trans",
+      "header": "<setHeader name=\"mapName\"><simple>[MTXMapname]</simple></setHeader><setHeader name=\"projectPath\"><simple>[MTXProjectPath]</simple></setHeader>",
+      "value": "<process ref=\"[MTXService]\" />"
+    }
+  },
+  {
+    "outputs": [],
+    "_id": "60520e8561042900296a59e7",
+    "version": "v0",
+    "palette": "6051e4bb7dea46002961f174",
+    "inputs": {
+      "FTPProtocol": { "type": "text", "value": "" },
+      "FTPHostIp": { "type": "text", "value": "" },
+      "FTPPort": { "type": "text", "value": "" },
+      "FTPPath": { "type": "text", "value": "" },
+      "FTPFilePattern": {
+        "type": "format",
+        "value": "",
+        "format": "&amp;antInclude=[FTPFilePattern]"
+      },
+      "FTPAuthentication": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "Password": "password=[FTPPassword]",
+          "Key": "privateKeyFile=[FTPKeyPath]"
+        }
+      },
+      "FTPUsername": { "type": "text", "value": "" },
+      "FTPPassword": { "type": "text", "value": "" },
+      "FTPKeyPath": { "type": "text", "value": "" },
+      "FTPDelete": {
+        "type": "boolean",
+        "value": "",
+        "options": { "false": "&amp;delete=true", "true": "&amp;delete=true" }
+      }
+    },
+    "xml": {
+      "tag": "trans",
+      "value": "<from uri=\"[FTPProtocol]://[FTPUsername]@[FTPHostIp]:[FTPPort]/[FTPPath]?[FTPAuthentication][FTPFilePattern][FTPDelete]\"/>"
+    },
+    "__v": 0
+  },
+  {
+    "outputs": [],
+    "_id": "60520edb61042900296a59e8",
+    "version": "v0",
+    "palette": "6051e5987dea46002961f175",
+    "inputs": {
+      "FTPProtocol": { "type": "text", "value": "" },
+      "FTPHostIp": { "type": "text", "value": "" },
+      "FTPPort": { "type": "text", "value": "" },
+      "FTPPath": { "type": "text", "value": "" },
+      "FTPAuthentication": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "Password": "password=[FTPPassword]",
+          "Key": "privateKeyFile=[FTPKeyPath]"
+        }
+      },
+      "FTPUsername": { "type": "text", "value": "" },
+      "FTPPassword": { "type": "text", "value": "" },
+      "FTPKeyPath": { "type": "text", "value": "" }
+    },
+    "xml": {
+      "tag": "trans",
+      "value": "<to uri=\"[FTPProtocol]://[FTPUsername]@[FTPHostIp]:[FTPPort]/[FTPPath]?[FTPAuthentication]\"/>"
+    },
+    "__v": 0
+  },
+  {
+    "outputs": [],
+    "_id": "611e4cb0d609a2002985baa9",
+    "version": "v0",
+    "palette": "611bb621362a29445ca5a8a6",
+    "inputs": {
+      "PGPOperation": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "None": "",
+          "Encrypt": "<marshal ><pgp keyFileName=\"file:./routes/PGP_Keys/[PGPName]/[PGPName]_public.gpg\" keyUserid=\"[PGPUsername]\" /></marshal><to uri=\"audit:PgpEncrypt?level=info\" />",
+          "Decrypt": "<unmarshal ><pgp keyFileName=\"file:./routes/PGP_Keys/[PGPName]/[PGPName]_secret.gpg\" keyUserid=\"[PGPUsername]\" password=\"[PGPPassword]\"/></unmarshal>"
+        }
+      },
+      "PGPKey": { "type": "text", "value": "" },
+      "PGPName": {
+        "type": "appConfig",
+        "key": "PGPKey",
+        "path": "pgp.name",
+        "value": ""
+      },
+      "PGPUsername": {
+        "type": "appConfig",
+        "key": "PGPKey",
+        "path": "pgp.username",
+        "value": ""
+      },
+      "PGPPassword": {
+        "type": "appConfig",
+        "key": "PGPKey",
+        "path": "pgp.password",
+        "value": ""
+      }
+    },
+    "xml": { "tag": "trans", "value": "[PGPOperation]" },
+    "__v": 0
+  },
+  {
+    "outputs": [],
+    "_id": "6213d65fd981fd002b99740a",
+    "version": "v0",
+    "palette": "6213d4a43de4a6002a3400d6",
+    "inputs": {
+      "RESTEnable": {
+        "type": "boolean",
+        "value": "",
+        "options": {
+          "false": "",
+          "true": "<from uri=\"netty-http:http://0.0.0.0:8222/MINTS/RESTEntry/[INTID]\" />"
+        }
+      }
+    },
+    "xml": { "tag": "from", "value": "[RESTEnable]" },
+    "__v": 0
+  },
+  {
+    "outputs": [
+      {
+        "file": "[INTID].xml",
+        "data": "<route id=\"[INTID]\"><from uri=\"[SourceAppConnKey]:queue:[InletQueue]?selector=scenarioId%3D'[INTID]'\" /><to uri=\"audit:Inlet?level=info\"/><setHeader name=\"serviceHeaders\"><simple>type:[MapType]|baseURL:/api/processPayload|method:POST|queryParams:false</simple></setHeader><setHeader name=\"serviceHeaderObject\"><simple></simple></setHeader><setHeader name=\"serviceQueryObject\"><simple></simple></setHeader><setHeader name=\"serviceMetadata\"><simple>{\"contentType\":\"[ContentType]\",\"mapName\":\"[Mapname]\",\"inputFields\":[InputFields],\"outputFields\": [OutputFields]}</simple></setHeader><setHeader name=\"endpoint\"><simple>[TargetAppConnKey]:queue:[ServiceEndpoint]</simple></setHeader><to uri=\"audit:SetParams?level=info\"/><to uri=\"[TransInletQueue]\"/><to uri=\"audit:Transform?level=info\"/></route>"
+      },
+      {
+        "file": "[INTID]Service.xml",
+        "data": "<route id=\"[INTID]Service\"><from uri=\"[TransInletQueue]?selector=scenarioId%3D'[INTID]'\" /><to uri=\"audit:Inlet?level=info\"/><process ref=\"[DataMapperService]\" /><to uri=\"audit:DataMapperProcessor?level=info\"/><recipientList><header>endpoint</header></recipientList><to uri=\"audit:Outlet?level=info\"/></route>"
+      }
+    ],
+    "_id": "6230ab93821fc9002db3eda6",
+    "version": "v0",
+    "palette": "6197c3afa772fe0029e917ef",
+    "inputs": {
+      "MapType": { "type": "text", "value": "" },
+      "Mapname": { "type": "text", "value": "" },
+      "ContentType": {
+        "type": "choose",
+        "value": "",
+        "options": { "JSON": "JSON", "XML": "XML" }
+      },
+      "InputFields": { "type": "csv", "value": "" },
+      "OutputFields": { "type": "csv", "value": "" },
+      "ServiceEndpoint": { "type": "text", "value": "" },
+      "TransInletQueue": { "type": "text", "value": "" }
+    },
+    "__v": 0,
+    "xml": {
+      "tag": "trans",
+      "header": "<setHeader name=\"serviceHeaders\"><simple>type:[MapType]|baseURL:/api/processPayload|method:POST|queryParams:false</simple></setHeader><setHeader name=\"serviceHeaderObject\"><simple></simple></setHeader><setHeader name=\"serviceQueryObject\"><simple></simple></setHeader><setHeader name=\"serviceMetadata\"><simple>{\"contentType\":\"[ContentType]\",\"mapName\":\"[Mapname]\",\"inputFields\":[InputFields],\"outputFields\": [OutputFields]}</simple></setHeader>",
+      "value": "<process ref=\"[DataMapperService]\" />"
+    }
+  },
+  {
+    "outputs": [],
+    "_id": "62320147129c3f4ab490f60a",
+    "version": "v0",
+    "palette": "6230bc36a9e1194d0cc19ae4",
+    "xml": { "tag": "from", "value": " " },
+    "__v": 0,
+    "inputs": {
+      "RESTEnable": {
+        "type": "boolean",
+        "value": "",
+        "options": { "false": "", "true": "" }
+      }
+    }
+  },
+  {
+    "outputs": [],
+    "_id": "6245b23c8db88218b8052751",
+    "version": "v0",
+    "palette": "6245a811a58004674c0393dd",
+    "inputs": {
+      "ZipAction": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "None": "",
+          "Zip": "",
+          "Unzip": "<split streaming=\"true\"><ref>zipSplitter</ref><convertBodyTo type=\"java.lang.String\" charset=\"UTF-8\" />[ChildRoute]</split>"
+        }
+      }
+    },
+    "xml": { "tag": "to", "childRoute": true, "value": "[ZipAction]" },
+    "__v": 0
+  },
+  {
+    "outputs": [],
+    "_id": "6245b4288db88218b8052752",
+    "version": "v0",
+    "palette": "6245a8b1a58004674c0393de",
+    "inputs": {
+      "EncodeAction": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "None": "",
+          "Encode": "<marshal>[EncodeType]</marshal>",
+          "Decode": "<unmarshal>[EncodeType]</unmarshal><transform><simple>${bodyAs(String)}</simple></transform>"
+        }
+      },
+      "EncodeType": {
+        "type": "choose",
+        "value": "",
+        "options": { "None": "", "base64": "<base64/>" }
+      }
+    },
+    "xml": { "tag": "to", "value": "[EncodeAction]" },
+    "__v": 0
+  },
+  {
+    "outputs": [],
+    "_id": "6245b7718db88218b8052753",
+    "version": "v0",
+    "palette": "6245ac28a58004674c0393e0",
+    "inputs": {
+      "AwsS3Path": { "type": "text", "value": "" },
+      "AwsS3FilePattern": {
+        "type": "choose",
+        "value": "",
+        "options": {
+          "Source": "${in.header.CamelFileNameOnly}",
+          "Static": "[AwsS3Filename]",
+          "Dynamic": "[AwsS3FileFormat]"
+        }
+      },
+      "AwsS3Filename": { "type": "text", "value": "" },
+      "AwsS3FileFormat": { "type": "text", "value": "" }
+    },
+    "xml": {
+      "tag": "trans",
+      "header": "",
+      "value": "AKIATAC4NM334JKLZIHN&amp;secretKey=RAW(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)"
+    },
+    "__v": 0
+  },
+  {
+    "outputs": [],
+    "_id": "62ecff9abb304c1f941183b5",
+    "version": "v0",
+    "palette": "6245aa60a58004674c0393df",
+    "__v": 0
+  }
+]

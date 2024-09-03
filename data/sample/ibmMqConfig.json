@@ -1,0 +1,14 @@
+[
+  {
+    "_id": "5ea1915580b49b4420cbf630",
+    "version": "v0",
+    "configuration": {
+      "url": "https://mq-ibm-mq:9443",
+      "path": "/ibmmq/rest/v1/admin",
+      "queueManager": "mq",
+      "username": "admin",
+      "password": "my-admin-password"
+    },
+    "__v": 0
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "list": ["GB", "IN", "MX", "US", "IND"],
+    "_id": "5dc00c1521b2152bb06c7d7c",
+    "type": "countries",
+    "format": { "Country": "string" },
+    "__v": 0
+  },
+  {
+    "list": [
+      "Customer Interact",
+      "Sourcing",
+      "Procurement",
+      "Order Processing",
+      "Order Fulfillment",
+      "Order Shipping",
+      "Test"
+    ],
+    "_id": "5dc00d3f21b2152bb06c7d7d",
+    "type": "applications",
+    "format": { "Application": "string" },
+    "__v": 0
+  },
+  {
+    "list": ["DEV", "FUT", "QA", "PROD"],
+    "_id": "5dc02baa21b2152bb06c7d7e",
+    "type": "environments",
+    "format": { "Environment": "string" },
+    "__v": 0
+  },
+  {
+    "list": [
+      "Support Path",
+      "Instance Independent",
+      "Volume Performance Testing"
+    ],
+    "_id": "5dc02c0d21b2152bb06c7d7f",
+    "type": "instances",
+    "format": { "Instance": "string" },
+    "__v": 0
+  },
+  {
+    "list": ["baseWith64"],
+    "_id": "5dcebbe000905025e894d208",
+    "type": "encodings",
+    "format": { "Encoding Type": "string" },
+    "__v": 0
+  },
+  {
+    "list": [{ "type": "queue", "prefix": "mq:queue:", "postfix": "" }],
+    "_id": "5dea837b439b5337281a8db5",
+    "type": "textReplacements",
+    "format": { "type": "string", "prefix": "string", "postfix": "string" },
+    "__v": 0
+  },
+  {
+    "list": ["None", "Encode", "Decode"],
+    "_id": "5e01fe38ff04d74e447005a9",
+    "type": "encodingChoice",
+    "format": { "Encoding Choice": "string" },
+    "__v": 0
+  },
+  {
+    "list": ["Static", "Dynamic", "Queue Header"],
+    "_id": "5eaabba7d336bb4de8dbc9ee",
+    "type": "filenamePatterns",
+    "format": { "Filename Pattern": "string" },
+    "__v": 0
+  },
+  {
+    "list": [
+      {
+        "key": "MQ.Creds",
+        "type": "choose",
+        "options": ["amqCreds", "wmqCreds"]
+      }
+    ],
+    "_id": "5f9fea593c1108fb3c482c53",
+    "type": "configurationOptions",
+    "format": { "key": "string", "type": "string", "options": "array" },
+    "__v": 0
+  },
+  {
+    "list": ["json", "xml"],
+    "_id": "5fc7c480ce118e0cd863521f",
+    "type": "contentTypeOptions",
+    "format": { "Content Type": "string" },
+    "__v": 0
+  }
+]

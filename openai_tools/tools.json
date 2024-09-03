@@ -1,0 +1,63 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "execute_mysql_query",
+      "description": "Executes an SQL query on a specified MySQL database and returns the results. The query should be a valid SQL statement. For example:\n\n1. To select all rows from a table named 'employees', use 'SELECT * FROM employees'.\n2. To count the number of rows where 'age' is between 30 and 40, use 'SELECT COUNT(*) AS number_of_employees FROM employees WHERE age BETWEEN 30 AND 40'.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The SQL query to execute on the database."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database to execute the query against."
+          }
+        },
+        "required": ["query", "database"],
+        "additionalProperties": false
+      }
+    },
+    "strict": true
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "execute_cypher_query",
+      "description": "Executes a Cypher query on the Neo4j database and returns the results. The query should be a valid Cypher statement. For example:\n\n1. To match all nodes and return the first 10, use 'MATCH (n) RETURN n LIMIT 10'.\n2. To count the number of nodes, use 'MATCH (n) RETURN COUNT(n) AS node_count'.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The Cypher query to execute on the Neo4j database."
+          }
+        },
+        "required": ["query"],
+        "additionalProperties": false
+      }
+    },
+    "strict": true
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_temperature",
+      "description": "Returns the temperature of a specified city. The city name should be a valid string representing one of the hardcoded cities: New York, Los Angeles, or Chicago.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "city_name": {
+            "type": "string",
+            "description": "The name of the city to get the temperature for. Example: 'New York', 'Los Angeles', 'Chicago'."
+          }
+        },
+        "required": ["city_name"],
+        "additionalProperties": false
+      }
+    },
+    "strict": true
+  }
+]
