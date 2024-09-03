@@ -538,7 +538,7 @@
     "xml": {
       "tag": "trans",
       "header": "",
-      "value": "<setHeader name=\"CamelAwsS3Key\"><simple>[AwsS3Path]/[AwsS3FilePattern]</simple></setHeader><to uri=\"aws-s3://mints-bucket?deleteAfterWrite=false&amp;region=US_EAST_1&amp;accessKey=AKIATAC4NM334JKLZIHN&amp;secretKey=RAW(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)\"/>"
+      "value": "S3KEY"
     },
     "__v": 0
   },
