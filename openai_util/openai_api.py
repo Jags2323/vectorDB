@@ -13,7 +13,7 @@ with open(tools_path) as f:
 
 def dynamic_import_function(function_name):
     # Import the function dynamically from functions.py
-    module = importlib.import_module("openai_tools.functions")
+    module = importlib.import_module("openai_util.functions")
     return getattr(module, function_name)
 
 def execute_function_call(tool_call):
